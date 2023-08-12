@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+// User
 Route::prefix('/user')->name('user.')->group(function() {
 
     Route::get('/videos', function () {
@@ -32,3 +35,15 @@ Route::prefix('/user')->name('user.')->group(function() {
 Route::get('/login', function () {
     return view('pages.auth.login');
 })->name('login');
+
+Route::get('/register', function () {
+    return view('pages.auth.register');
+})->name('register');
+
+
+// Admin
+Route::prefix('/admin')->name('admin.')->group(function() {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('/user', UserController::class);
+});

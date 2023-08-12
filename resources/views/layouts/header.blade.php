@@ -32,7 +32,7 @@
                     >Home</a>
                 </li>
                 <li>
-                    <a href="#about"
+                    <a href="{{ route('user.video') }}"
                         class="{{ request()->is("user/videos") ? $classActive : $classInActive }}"
                     >Video</a>
                 </li>
