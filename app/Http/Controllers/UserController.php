@@ -21,4 +21,8 @@ class UserController extends Controller
     public function edit($id) {
         return view('pages.admin.users.edit');
     }
+
+    public function change_password() {
+        return view('pages.admin.change_password');
+    }
 }

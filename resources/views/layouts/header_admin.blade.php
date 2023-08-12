@@ -13,7 +13,7 @@
                         </path>
                     </svg>
                 </button>
-                <a href="../../index.html" class="flex ml-2 md:mr-24">
+                <a href="{{ route('home') }}" class="flex ml-2 md:mr-24">
                     <img src="{{ asset('template_elerning/assets/logo-elearning.png') }}" class="h-8 mr-3" alt="FlowBite Logo" />
                     <span
                         class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">E-Learning</span>
@@ -48,7 +48,7 @@
                         </div>
                         <ul class="py-1" role="none">
                             <li>
-                                <a href="#"
+                                <a href="{{ route('admin.setting.index') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Settings</a>
                             </li>

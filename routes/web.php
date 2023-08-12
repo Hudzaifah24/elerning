@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +49,13 @@ Route::prefix('/admin')->name('admin.')->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/user', UserController::class);
+    Route::resource('/video', VideoController::class);
+    Route::resource('/transaction', TransactionController::class);
+    Route::resource('/transaction', TransactionController::class);
+
+    // Setting
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+
+    // Ubah Password
+    Route::get('/change/password/{id}', [UserController::class, 'change_password'])->name('setting.password.edit');
 });

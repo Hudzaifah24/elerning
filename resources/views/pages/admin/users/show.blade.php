@@ -109,7 +109,7 @@
                                     Ada banyak hal yang ...
                                 </td>
                                 <td class="flex items-center px-6 py-4 space-x-3">
-                                    <a href="./../videos/videos_detail.html"
+                                    <a href="{{ route('admin.video.show', 1) }}"
                                         class="font-medium text-green-600 dark:text-green-500 hover:underline">Detail</a>
                                 </td>
                             </tr>
