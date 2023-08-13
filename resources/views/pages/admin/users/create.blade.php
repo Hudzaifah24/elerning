@@ -21,13 +21,18 @@
                 </div>
             </div>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
-                <form>
+                <form action="{{ route('admin.user.store') }}" method="POST">
+                    @csrf
+                    @method('POST')
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="text" name="name" id="name"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" " required />
                         <label for="name"
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama</label>
+                        @error('name')
+                            <p id="standard_success_help" class="mt-2 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="email" name="email" id="email"
@@ -36,6 +41,9 @@
                         <label for="email"
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
                             address</label>
+                        @error('email')
+                            <p id="standard_success_help" class="mt-2 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="password" name="password" id="password"
@@ -43,6 +51,9 @@
                             placeholder=" " required />
                         <label for="password"
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                        @error('password')
+                            <p id="standard_success_help" class="mt-2 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="password" name="password_confirmation" id="password_confirmation"
@@ -57,7 +68,7 @@
                         <legend class="sr-only">Roles</legend>
 
                         <div class="flex items-center mb-4">
-                            <input id="role-option-1" type="radio" name="role" value="USA"
+                            <input id="role-option-1" type="radio" name="role" value="admin"
                                 class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                 checked>
                             <label for="role-option-1"
@@ -67,7 +78,7 @@
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="role-option-2" type="radio" name="role" value="Germany"
+                            <input id="role-option-2" type="radio" name="role" value="teacher"
                                 class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
                             <label for="role-option-2"
                                 class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -76,13 +87,16 @@
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="role-option-3" type="radio" name="role" value="Spain"
+                            <input id="role-option-3" type="radio" name="role" value="user"
                                 class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
                             <label for="role-option-3"
                                 class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                 User
                             </label>
                         </div>
+                        @error('role')
+                            <p id="standard_success_help" class="mt-2 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </fieldset>
 
                     <button type="submit"
