@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function login_page() {
+        return view('pages.auth.login');
+    }
+
+    public function register_page() {
+        return view('pages.auth.register');
+    }
+    
     /**
      * Handle an authentication attempt.
      */
@@ -27,19 +37,17 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-    public function register(String $id) {
+    public function register(Request $request) {
         $data = $request->validate([
             'name' => ['required', 'max:50', 'string'],
-            'email' => ['requered', 'email'],
-            'password' => ['required', 'confirm'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed'],
         ]);
 
         $user = User::create($data);
 
         try {
-            Auth::login($user);
-
-            return redirect()->route('home');
+            return redirect()->route('login');
         } catch (\Throwable $th) {
             throw $th;
 

@@ -17,4 +17,8 @@ class Video extends Model
         'price',
         'desc',
     ];
+
+    public function userVideo() {
+        return $this->hasOne(UserVideo::class);
+    }
 }

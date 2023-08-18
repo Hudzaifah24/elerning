@@ -18,7 +18,7 @@
                                 class="flex bg-gray-700 items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                                 Kembali
                             </a>
-                            <a href="{{ route('admin.user.edit', 1) }}"
+                            <a href="{{ route('admin.user.edit', $user->id) }}"
                                 class="flex bg-gray-700 items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                                 Edit User
                             </a>
@@ -31,14 +31,14 @@
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="text" name="name" id="name"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " value="Hudzaifah" disabled required />
+                            placeholder=" " value="{{ $user->name }}" disabled required />
                         <label for="name"
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama</label>
                     </div>
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="email" name="email" id="email"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " value="hudz@gmail.com" disabled required />
+                            placeholder=" " value="{{ $user->email }}" disabled required />
                         <label for="email"
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
                             address</label>
@@ -46,7 +46,7 @@
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="text" name="role" id="role"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " value="Admin" disabled required />
+                            placeholder=" " value="{{ $user->role }}" disabled required />
                         <label for="role"
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Role</label>
                     </div>
@@ -96,23 +96,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Tematik develop
-                                </th>
-                                <td class="px-6 py-4">
-                                    Rp 300.000
-                                </td>
-                                <td class="px-6 py-4">
-                                    Ada banyak hal yang ...
-                                </td>
-                                <td class="flex items-center px-6 py-4 space-x-3">
-                                    <a href="{{ route('admin.video.show', 1) }}"
-                                        class="font-medium text-green-600 dark:text-green-500 hover:underline">Detail</a>
-                                </td>
-                            </tr>
+                            @foreach ($userVideos as $userVideo)
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $userVideo->videos->title }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        Rp {{ number_format($userVideo->videos->price) }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ Str::substr($userVideo->videos->desc, 0, 20) . '...' }}
+                                    </td>
+                                    <td class="flex items-center px-6 py-4 space-x-3">
+                                        <a href="{{ route('admin.video.show', $userVideo->videos->id) }}"
+                                            class="font-medium text-green-600 dark:text-green-500 hover:underline">Detail</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

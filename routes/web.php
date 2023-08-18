@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -35,21 +36,27 @@ Route::prefix('/user')->name('user.')->group(function() {
 });
 
 // AUTHENTICATION
-Route::get('/login', function () {
-    return view('pages.auth.login');
-})->name('login');
+Route::middleware('guest')->group(function() {
+    Route::get('/login', [AuthController::class, 'login_page'])->name('login');
 
-Route::get('/register', function () {
-    return view('pages.auth.register');
-})->name('register');
+    Route::post('/login/process', [AuthController::class, 'authenticate'])->name('login.process');
+    
+    Route::get('/register', [AuthController::class, 'register_page'])->name('register');
+    
+    Route::post('/register/process', [AuthController::class, 'register'])->name('register.process');
+});
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin
 Route::prefix('/admin')->name('admin.')->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/user', UserController::class);
+    Route::delete('/user/destroy/all', [UserController::class, 'destroy_all'])->name('user.destroy.all');
+
     Route::resource('/video', VideoController::class);
+    Route::delete('/video/destroy/all', [VideoController::class, 'destroy_all'])->name('video.destroy.all');
     Route::resource('/transaction', TransactionController::class);
     Route::resource('/transaction', TransactionController::class);
 

@@ -18,7 +18,7 @@
                             class="flex bg-gray-700 items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             Kembali
                         </a>
-                        <a href="{{ route('admin.video.edit', 1) }}"
+                        <a href="{{ route('admin.video.edit', $video->id) }}"
                             class="flex bg-gray-700 items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             Edit Video
                         </a>
@@ -29,28 +29,28 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
             <div>
 
-                <iframe class="w-full h-56 mb-6" src="https://www.youtube.com/embed/MofaZRiwiOw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                <iframe class="w-full h-56 mb-6" src="{{ $video->link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                 </iframe>
 
                 <div class="relative z-0 w-full mb-6 group">
                     <input type="text" name="title" id="title"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " value="Tematik Develop" disabled required />
+                        placeholder=" " value="{{ $video->title }}" disabled required />
                     <label for="title"
                         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Title</label>
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input type="text" name="price" id="price"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " value="hudz@gmail.com" disabled required />
+                        placeholder=" " value="{{ $video->price }}" disabled required />
                     <label for="price"
                         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Harga</label>
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <p type="text" name="role" id="role"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " value="Admin" disabled required>
-                        Ada banyak hal yang harus kita ketahui Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam consequuntur quibusdam ex inventore vero expedita consectetur quisquam quidem. Labore cupiditate doloribus eos odit debitis accusantium atque cum eaque error ipsum.
+                        placeholder=" " disabled required>
+                        {{ $video->desc }}
                     </p>
                     <label for="role"
                         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Deskripsi</label>

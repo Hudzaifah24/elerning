@@ -15,4 +15,12 @@ class UserVideo extends Model
         'user_id',
         'video_id',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function videos() {
+        return $this->belongsTo(Video::class, 'video_id');
+    }
 }
