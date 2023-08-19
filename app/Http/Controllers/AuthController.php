@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Traits\Fonnte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    use Fonnte;
+    
     public function login_page() {
         return view('pages.auth.login');
     }
@@ -26,6 +29,12 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+        $user = User::where('email', $request->email)->first();
+
+        if ($user->active == 0) {
+            return redirect()->route('activication');
+        }
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -41,13 +50,20 @@ class AuthController extends Controller
         $data = $request->validate([
             'name' => ['required', 'max:50', 'string'],
             'email' => ['required', 'email'],
+            'phone' => ['required'],
             'password' => ['required', 'confirmed'],
         ]);
 
+        $data['token'] = rand(111111, 999999);
+
         $user = User::create($data);
 
+        $messages = "Verification Your Account $user->token";
+
+        $this->send_message($user->phone, $messages);
+
         try {
-            return redirect()->route('login');
+            return redirect()->route('activication');
         } catch (\Throwable $th) {
             throw $th;
 
@@ -55,6 +71,24 @@ class AuthController extends Controller
         }
 
         return back()->withInput();
+    }
+
+    public function activication() {
+        return view('pages.auth.activication');
+    }
+
+    public function activication_process(Request $request) {
+        $user = User::where('token', $request->token)->first();
+        
+        if ($user) {
+            $user->update([
+                'active' => 1,
+            ]);
+
+            return redirect()->route('login');
+        }
+
+        return redirect()->back()->with('error', 'Token Tidak Sesuai');
     }
 
     public function logout() {
