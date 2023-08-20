@@ -66,7 +66,7 @@ Route::prefix('/admin')->name('admin.')->group(function() {
 
     // Setting
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
-
-    // Ubah Password
-    Route::get('/change/password/{id}', [UserController::class, 'change_password'])->name('setting.password.edit');
+    Route::post('/setting/process', [SettingController::class, 'update'])->name('setting.update');
+    Route::get('/setting/change/password', [SettingController::class, 'change_password'])->name('setting.change.password');
+    Route::post('/setting/change/password/process', [SettingController::class, 'change_password_process'])->name('setting.change.password.process');
 });

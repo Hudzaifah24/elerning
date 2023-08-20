@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if ($user->active == 0) {
+        if ($user && $user->active == 0) {
             return redirect()->route('activication');
         }
 

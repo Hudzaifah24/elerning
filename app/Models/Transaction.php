@@ -16,4 +16,8 @@ class Transaction extends Model
         'no_invoice',
         'user_id',
     ];
+
+    protected function user() {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -62,10 +62,6 @@ class UserController extends Controller
         return redirect()->route('admin.user.index');
     }
 
-    public function change_password() {
-        return view('pages.admin.change_password');
-    }
-
     public function destroy($id) {
         $user = User::find($id);
 

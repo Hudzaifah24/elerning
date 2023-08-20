@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->enum('status', ['PENDING', 'SUCCESS', 'FAILED']);
             $table->string('no_invoice');
+            $table->string('amount');
+            $table->text('link');
             $table->foreignId('user_id');
             $table->timestamps();
         });
